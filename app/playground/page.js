@@ -1,5 +1,8 @@
 import Button from "@/components/button";
+import Input from "@/components/input";
+import Label from "@/components/label";
 import PageHeader from "@/components/page-header";
+import Select from "@/components/select";
 import TransactionItem from "@/components/transaction-item";
 import TransactionSummaryItem from "@/components/transaction-summary-item";
 import Trend from "@/components/trend";
@@ -12,9 +15,7 @@ export default function Page() {
             <div>
                 <h2 className="mb-4 text-lg font-mono">Page Header</h2>
                 <hr className="mb-4 border-gray-200 dark:border-gray-800" />
-                <div>
-                    <PageHeader />
-                </div>
+                <div><PageHeader /></div>
             </div>
 
             <div>
@@ -71,22 +72,22 @@ export default function Page() {
                 <hr className="mb-4 border-gray-200 dark:border-gray-800" />
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="text-gray-700 dark:text-gray-300 block mb-1">Enter your name</label>
-                        <input type="text" placeholder="Type something here..." className="w-full rounded-md shadow-sm border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-950" />
+                        <Label className="mb-1">Enter your name</Label>
+                        <Input type="text" placeholder="Type something here..." />
                     </div>
 
                     <div>
-                        <label className="text-gray-700 dark:text-gray-300 block mb-1">City</label>
-                        <select className="w-full rounded-md shadow-sm border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-950">
+                        <Label className="mb-1">City</Label>
+                        <Select>
                             <option>Bhubaneswar</option>
                             <option>Cuttack</option>
                             <option>Jatni</option>
-                        </select>
+                        </Select>
                     </div>
 
                     <div className="flex items-center">
-                        <input type="checkbox" className="rounded border-gray-300 text-gray-700 bg-white dark:bg-gray-950 dark:text-gray-500 shadow-sm" />
-                        <label className="text-gray-700 dark:text-gray-300 block ml-2">City</label>
+                        <Input type="checkbox" id="terms" />
+                        <Label className="ml-2" htmlFor="terms">Accept terms</Label>
                     </div>
                 </div>
             </div>
