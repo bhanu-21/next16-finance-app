@@ -22,8 +22,8 @@ export default async function RootLayout({ children }) {
   const theme = await useServerDarkMode()
 
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased ${theme}`}>
-      <body className="min-h-screen flex flex-col">
+    <html lang="en" className={`h-full antialiased ${theme}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col px-8`}>
         <Providers>
           {children}
         </Providers>
