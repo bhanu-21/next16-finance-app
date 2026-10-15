@@ -4,14 +4,18 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import Label from "@/components/label";
 import Select from "@/components/select";
+import { purgeTransactionListCache } from "@/lib/actions";
 import { categories, types } from "@/lib/consts";
 import { transactionSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function TransactionForm() {
     const [isSaving, setSaving] = useState(false)
+    const router = useRouter()
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm({
         mode: "onTouched",
         resolver: zodResolver(transactionSchema)
@@ -25,6 +29,8 @@ export default function TransactionForm() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...data, created_at: `${data.created_at}T00:00:00` })
             })
+            await purgeTransactionListCache()
+            router.push('/dashboard')
         } finally {
             setSaving(false)
         }
