@@ -7,17 +7,27 @@ import Select from "@/components/select";
 import { categories, types } from "@/lib/consts";
 import { transactionSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function TransactionForm() {
+    const [isSaving, setSaving] = useState(false)
     const { register, handleSubmit, watch, formState: { errors } } = useForm({
         mode: "onTouched",
         resolver: zodResolver(transactionSchema)
     })
 
-    const onSubmit = (data) => {
-        console.log(data);
-        console.log(process.env.NEXT_PUBLIC_API_URL)
+    const onSubmit = async (data) => {
+        setSaving(true)
+        try {
+            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...data, created_at: `${data.created_at}T00:00:00` })
+            })
+        } finally {
+            setSaving(false)
+        }
     }
 
     return (
@@ -57,7 +67,7 @@ export default function TransactionForm() {
             </div>
 
             <div className="flex justify-end">
-                <Button type="submit">Save</Button>
+                <Button type="submit" disabled={isSaving}>Save</Button>
             </div>
         </form>
     )
