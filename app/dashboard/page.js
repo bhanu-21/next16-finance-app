@@ -7,7 +7,7 @@ import Link from "next/link";
 import { PlusCircle } from "lucide-react";
 import { sizes, variants } from "@/lib/variants";
 
-export default function Page() {
+export default async function Page() {
     return (
         <>
             <section className="mb-8">

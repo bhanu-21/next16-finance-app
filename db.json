@@ -102,6 +102,5 @@
       "amount": 4000,
       "prevAmount": 3000
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
