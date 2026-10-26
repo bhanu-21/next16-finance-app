@@ -1,7 +1,7 @@
 {
   "transactions": [
     {
-      "id": "1",
+      "id": 1,
       "amount": 100,
       "type": "Expense",
       "description": "Restaurant",
@@ -9,7 +9,7 @@
       "created_at": "2023-03-15T23:00:00"
     },
     {
-      "id": "2",
+      "id": 2,
       "amount": 159,
       "type": "Expense",
       "description": "Gas",
@@ -17,7 +17,7 @@
       "created_at": "2023-03-15T23:00:00"
     },
     {
-      "id": "3",
+      "id": 3,
       "amount": 500,
       "type": "Income",
       "description": "Salary",
@@ -25,7 +25,7 @@
       "created_at": "2023-03-15T23:00:00"
     },
     {
-      "id": "4",
+      "id": 4,
       "amount": 99,
       "type": "Expense",
       "description": "Rent",
@@ -38,7 +38,7 @@
       "amount": 900,
       "description": "Paying for stuff...",
       "created_at": "2024-01-23T00:00:00",
-      "id": "5"
+      "id": 5
     },
     {
       "type": "Investment",
@@ -46,39 +46,47 @@
       "amount": 10000,
       "description": "For the future",
       "created_at": "2023-11-17T00:00:00",
-      "id": "6"
+      "id": 6
     },
     {
-      "type": "Expense",
-      "category": "Food",
-      "amount": 100,
-      "description": "testing",
-      "created_at": "2025-11-23T00:00:00",
-      "id": "D8F7baTDu2g"
+      "type": "Income",
+      "category": "Housing",
+      "amount": 6771,
+      "description": "Paying for stuff...",
+      "created_at": "2023-11-17T00:00:00",
+      "id": 7
+    },
+    {
+      "type": "Income",
+      "category": "Housing",
+      "amount": 343,
+      "description": "Paying for stuff...",
+      "created_at": "2024-01-23T00:00:00",
+      "id": 8
     },
     {
       "type": "Saving",
-      "category": "Education",
-      "amount": 12000,
-      "description": "savings",
-      "created_at": "2026-11-05T00:00:00",
-      "id": "ZEg-nu4ZN24"
+      "category": "Housing",
+      "amount": 500,
+      "description": "Salary",
+      "created_at": "2023-11-17T00:00:00",
+      "id": 9
     },
     {
-      "type": "Investment",
-      "category": "Health",
-      "amount": 101,
-      "description": "Footer",
-      "created_at": "2000-01-01T00:00:00",
-      "id": "p0ltk3wN1u8"
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "Salary",
+      "created_at": "2024-01-23T00:00:00",
+      "id": 10
     },
     {
-      "type": "Investment",
-      "category": "Health",
-      "amount": 101,
-      "description": "Footer",
-      "created_at": "2000-01-01T00:00:00",
-      "id": "mJbrGPeGZ8I"
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "Salary",
+      "created_at": "2024-01-23T00:00:00",
+      "id": 11
     }
   ],
   "trends": [

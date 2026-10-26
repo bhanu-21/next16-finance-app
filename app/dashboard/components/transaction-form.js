@@ -5,7 +5,7 @@ import FormError from "@/components/form-error";
 import Input from "@/components/input";
 import Label from "@/components/label";
 import Select from "@/components/select";
-import { purgeTransactionListCache } from "@/lib/actions";
+import { createTransaction, purgeTransactionListCache } from "@/lib/actions";
 import { categories, types } from "@/lib/consts";
 import { transactionSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,12 +25,7 @@ export default function TransactionForm() {
     const onSubmit = async (data) => {
         setSaving(true)
         try {
-            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...data, created_at: `${data.created_at}T00:00:00` })
-            })
-            await purgeTransactionListCache()
+            await createTransaction(data)
             router.push('/dashboard')
         } finally {
             setSaving(false)
