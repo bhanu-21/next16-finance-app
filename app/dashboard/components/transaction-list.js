@@ -19,7 +19,7 @@ const groupAndSumTransactionsByDate = (transactions) => {
 
 export default async function TransactionList() {
     const supabase = await createClient()
-    const { data: transactions, error } = await supabase.from('transactions').select('*').order('created_at', { ascending: true })
+    const { data: transactions, error } = await supabase.from('transactions').select('*').order('created_at', { ascending: false })
     const grouped = groupAndSumTransactionsByDate(transactions)
 
     return (
