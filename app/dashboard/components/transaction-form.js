@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 export default function TransactionForm() {
     const [isSaving, setSaving] = useState(false)
     const router = useRouter()
+    const [lastError, setLastError] = useState()
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm({
         mode: "onTouched",
@@ -24,9 +25,12 @@ export default function TransactionForm() {
 
     const onSubmit = async (data) => {
         setSaving(true)
+        setLastError()
         try {
             await createTransaction(data)
             router.push('/dashboard')
+        } catch (error) {
+            setLastError(error)
         } finally {
             setSaving(false)
         }
@@ -70,7 +74,8 @@ export default function TransactionForm() {
                 </div>
             </div>
 
-            <div className="flex justify-end">
+            <div className="flex justify-between items-center">
+                <div>{lastError && <FormError error={lastError} />}</div>
                 <Button type="submit" disabled={isSaving}>Save</Button>
             </div>
         </form>
