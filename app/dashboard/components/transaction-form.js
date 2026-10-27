@@ -5,7 +5,7 @@ import FormError from "@/components/form-error";
 import Input from "@/components/input";
 import Label from "@/components/label";
 import Select from "@/components/select";
-import { createTransaction, purgeTransactionListCache } from "@/lib/actions";
+import { createTransaction } from "@/lib/actions";
 import { categories, types } from "@/lib/consts";
 import { transactionSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,14 +14,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function TransactionForm() {
-    const [isSaving, setSaving] = useState(false)
-    const router = useRouter()
-    const [lastError, setLastError] = useState()
-
-    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
         mode: "onTouched",
         resolver: zodResolver(transactionSchema)
     })
+    const [isSaving, setSaving] = useState(false)
+    const router = useRouter()
+    const [lastError, setLastError] = useState()
+    const type = watch("type")
+
 
     const onSubmit = async (data) => {
         setSaving(true)
@@ -41,7 +42,13 @@ export default function TransactionForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <Label className="mb-1">Type</Label>
-                    <Select {...register("type")}>
+                    <Select {...register("type", {
+                        onChange: (e) => {
+                            if (e.target.value !== 'Expense') {
+                                setValue('category', '')
+                            }
+                        }
+                    })}>
                         {types.map(type => <option key={type}>{type}</option>)}
                     </Select>
                     <FormError error={errors.type} />
@@ -49,7 +56,8 @@ export default function TransactionForm() {
 
                 <div>
                     <Label className="mb-1">Category</Label>
-                    <Select {...register("category")}>
+                    <Select {...register("category")} disabled={type !== 'Expense'}>
+                        <option value="">Select a category</option>
                         {categories.map(category => <option key={category}>{category}</option>)}
                     </Select>
                     <FormError error={errors.category} />
