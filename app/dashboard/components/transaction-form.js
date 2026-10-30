@@ -25,8 +25,6 @@ export default function TransactionForm() {
 
 
     const onSubmit = async (data) => {
-        // console.log(data)
-        // return
         setSaving(true)
         setLastError()
         try {

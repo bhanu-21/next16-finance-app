@@ -16,7 +16,9 @@ export default async function Page() {
             <section className="mb-8 flex justify-between items-center">
                 <h1 className="text-4xl font-semibold">Summary</h1>
                 <aside>
-                    <Range />
+                    <Suspense fallback={<TrendFallback />}>
+                        <Range />
+                    </Suspense>
                 </aside>
             </section>
 
