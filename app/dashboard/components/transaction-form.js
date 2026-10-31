@@ -5,7 +5,7 @@ import FormError from "@/components/form-error";
 import Input from "@/components/input";
 import Label from "@/components/label";
 import Select from "@/components/select";
-import { createTransaction } from "@/lib/actions";
+import { createTransaction, updateTransaction } from "@/lib/actions";
 import { categories, types } from "@/lib/consts";
 import { transactionSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,7 +30,7 @@ export default function TransactionForm({ initialData }) {
         setLastError()
         try {
             if (editing) {
-                // Edit action
+                await updateTransaction(initialData.id, data)
             } else {
                 await createTransaction(data)
             }
