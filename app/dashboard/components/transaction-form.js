@@ -13,22 +13,27 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function TransactionForm() {
+export default function TransactionForm({ initialData }) {
     const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
         mode: "onTouched",
-        resolver: zodResolver(transactionSchema)
+        resolver: zodResolver(transactionSchema),
+        defaultValues: initialData ?? { created_at: new Date().toISOString().split('T')[0] }
     })
     const [isSaving, setSaving] = useState(false)
     const router = useRouter()
     const [lastError, setLastError] = useState()
     const type = watch("type")
-
+    const editing = Boolean(initialData)
 
     const onSubmit = async (data) => {
         setSaving(true)
         setLastError()
         try {
-            await createTransaction(data)
+            if (editing) {
+                // Edit action
+            } else {
+                await createTransaction(data)
+            }
             router.push('/dashboard')
         } catch (error) {
             setLastError(error)
@@ -65,7 +70,7 @@ export default function TransactionForm() {
 
                 <div>
                     <Label className="mb-1">Date</Label>
-                    <Input {...register("created_at")} />
+                    <Input {...register("created_at")} disabled={editing} />
                     <FormError error={errors.created_at} />
                 </div>
 
