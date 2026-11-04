@@ -9,12 +9,15 @@ import { ErrorBoundary } from "react-error-boundary";
 import { types } from "@/lib/consts";
 import Range from "./components/range";
 import TransactionListWrapper from "./components/transaction-list-wrapper";
+import { createClient } from "@/lib/supabase/server";
 
 export const instant = false;
 
 export default async function Page({ searchParams }) {
     const params = await searchParams;
     const range = params?.range ?? 'last30days'
+    const supabase = await createClient()
+    console.log(await supabase.auth.getUser())
 
     return (
         <div className="space-y-8">
