@@ -6,8 +6,7 @@ export async function GET(request) {
     const token_hash = searchParams.get('token_hash')
     const type = searchParams.get('type')
     const next = searchParams.get('next') ?? '/'
-    const redirectTo = request.nextUrl.clone()
-    redirectTo.pathname = next
+    const redirectTo = new URL(next, request.url)
     redirectTo.searchParams.delete('token_hash')
     redirectTo.searchParams.delete('type')
 

@@ -1,6 +1,9 @@
 import PageHeader from "@/components/page-header";
+import { connection } from "next/server";
 
-export default function Layout({ children }) {
+export default async function Layout({ children }) {
+    await connection();
+
     return (
         <>
             <PageHeader className="my-8" />
